@@ -1,0 +1,68 @@
+form#hit_form {
+  float:left;
+  margin-right: 10px;
+}
+
+form#stay_form {
+  float: left;
+}
+
+img.card_image {
+  margin: 0px 5px 5px 0px;
+}
+
+body {
+
+color: white;
+background-color: #118200;
+background-image: url("http://www.transparenttextures.com/patterns/felt.png");
+
+
+}
+
+h2 {
+  color: white;
+}
+
+.navbar {
+background-color: #CD5300;
+background-color: black;
+}
+
+
+.cards {
+  margin-top: 20px;
+}
+
+.player_dealer_cards {
+  border: 1px solid white; 
+
+}
+
+
+.alert  {
+  text-align: center;
+}
+
+.play_again {
+  text-align: center;
+}
+
+.intro {
+margin-top: 20px;
+}
+
+.text-warning, .bet{
+text-align: center;
+}
+
+
+.message {
+  text-align:center;
+}
+
+
+
+
+
+
