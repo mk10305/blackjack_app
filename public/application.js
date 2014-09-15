@@ -1,19 +1,6 @@
 
 $(document).ready(function() {
 
-
-      $( ".message2" ).hide();
-  
-
-
-    $( "#bet" ).submit(function( event ) {
-    if (!($.isNumeric( $('#bet_amount').val() ))){
-
-      $( ".message2" ).show();
-    }
-  });
-
-
   $(".card_div").css("height", $(".player_dealer_cards").height());
 
   player_hits();
