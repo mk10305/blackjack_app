@@ -159,6 +159,7 @@ puts session[:player_name]
 puts session[:player_pot]
 puts session[:player_bet]
 puts session[:turn]
+INITIAL_POT_AMOUNT = 500
   if params[:bet_amount].nil? || params[:bet_amount].to_i == 0 
     @error = "You must enter a numerical value for your bet"
     halt erb(:bet)
