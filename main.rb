@@ -5,7 +5,7 @@ set :sessions, true
 set :protection, :except=>[:json_crsf]
 BLACKJACK_AMOUNT = 21
 DEALER_MIN_HIT = 17
-INITIAL_POT_AMOUNT = 500
+INITIAL_POT_AMOUNT = "500"
 
 
 helpers do
@@ -59,7 +59,7 @@ end
 def winner!(msg)
   @play_again = true
   @show_hit_or_stay_buttons = false
-  session[:player_pot] = session[:player_pot] + session[:player_bet]
+  session[:player_pot] = (session[:player_pot].to_i + session[:player_bet].to_i).to_s
   @winner = "<strong>#{session[:player_name]} wins! </strong> #{msg}"
 
 end
@@ -67,9 +67,9 @@ end
 def loser!(msg)
   @play_again = true
   @show_hit_or_stay_buttons = false
-  session[:player_pot] = session[:player_pot] - session[:player_bet]
+  session[:player_pot] = (session[:player_pot].to_i - session[:player_bet].to_i).to_s
 
-  if (session[:player_pot] <= 0)
+  if (session[:player_pot].to_i <= 0)
     @play_again = false
     @zero_balance = true
     @loser="<strong>#{session[:player_name]} you lose and have no money left to play another round! </strong> #{msg}"
@@ -111,7 +111,7 @@ end
 
 
 get '/new_player' do
-  session[:player_pot] = INITIAL_POT_AMOUNT
+  session[:player_pot] = "500"#INITIAL_POT_AMOUNT
   #render form
   erb :new_player
 end
