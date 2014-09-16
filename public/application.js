@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
   //k$(".card_div").css("height", $(".player_dealer_cards").height());
- $(".player_dealer_cards:last").css("height", $(".player_dealer_cards:first").height());
+ //$(".player_dealer_cards:last").css("height", $(".player_dealer_cards:first").height());
 
   player_hits();
   player_stays();
