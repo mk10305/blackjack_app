@@ -83,7 +83,7 @@
           <h3> Dealer has <%= calculate_total(session[:dealer_cards])%> and will hit.</h3>
 
           <form id="dealer_hit" action='/game/dealer/hit' method='post'>
-          <input type='submit' class='btn btn-primary' value="Click to see Dealer's card">
+          <input type='submit' class='btn btn-primary dealer_hit' value="Click to see Dealer's card">
         </form>
         <% end %>
       </div>
@@ -115,12 +115,21 @@
 <script>
 $(document).ready(function(){
   setTimeout(function(){
-    if( $(".player_dealer_cards:last").height() < $(".player_dealer_cards:first").height() )   
+    if( $(".player_dealer_cards:last").height() < $(".player_dealer_cards:first").height() ) {
+$(".player_dealer_cards:last").css("height", $(".player_dealer_cards:first").height());
+$(".player_dealer_cards:first").css("height", $(".player_dealer_cards:first").height());
 
-      $(".player_dealer_cards:last").css("height", $(".player_dealer_cards:first").height());
-      else
+    }  
 
-      $(".player_dealer_cards:first").css("height", $(".player_dealer_cards:last").height());
+      
+      else{
+
+$(".player_dealer_cards:first").css("height", $(".player_dealer_cards:last").height());
+$(".player_dealer_cards:last").css("height", $(".player_dealer_cards:last").height());
+
+      }
+
+      
 
   },
   150);
