@@ -7,7 +7,17 @@ BLACKJACK_AMOUNT = 21
 DEALER_MIN_HIT = 17
 INITIAL_POT_AMOUNT = 500
 
+configure :development do
+  set(:session_secret, 'a random string that wont change')
+end
 
+configure :production do
+  set(:session_secret, '*&(${)UIJH$(&*(&*(@(*)(!)))IUYA0984)})')
+end
+
+configure do
+  enable :sessions    
+end
 helpers do
 
   def calculate_total(cards)
@@ -109,7 +119,6 @@ get '/'  do
   
 end
 
-
 get '/new_player' do
   session[:player_pot] = INITIAL_POT_AMOUNT
   #render form
@@ -117,6 +126,11 @@ get '/new_player' do
 end
 
 post '/new_player' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
+p session
   if params[:player_name].empty?
     @error = "Name is required"
     halt erb(:new_player)
@@ -128,6 +142,11 @@ end
 
 
 get '/bet' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
+p session
   @game_total = true
  
   session[:player_bet] = nil
@@ -136,18 +155,15 @@ get '/bet' do
 end
 
 post '/bet' do
-
-  if params[:bet_amount].nil? 
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
+  if params[:bet_amount].nil? || params[:bet_amount].to_i == 0 
     @error = "You must enter a numerical value for your bet"
     halt erb(:bet)
   elsif params[:bet_amount].to_i > session[:player_pot].to_i
     @error = "The bet amount cannot be greater than what you have ($#{session[:player_pot]})"
-    halt erb(:bet)
-  elsif params[:bet_amount].to_i < 0
-    @error = "The bet amount must be greater than 0"
-    halt erb(:bet)
-  elsif params[:bet_amount].to_i == 0
-    @error = "The bet amount must be greater than 0"
     halt erb(:bet)
   else
     session[:player_bet] = params[:bet_amount].to_i
@@ -160,6 +176,11 @@ end
 
 
 get '/game' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
+p session
   @game_total = true
   @game_bet = true
   session[:turn] = session[:player_name]
@@ -182,6 +203,10 @@ end
 
 
 post '/game/player/hit' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
   @game_total = true
   @game_bet = true
   session[:player_cards] << session[:deck].pop
@@ -200,6 +225,10 @@ post '/game/player/hit' do
 end
 
 post '/game/player/stay' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
   @game_total = true
   @game_bet = true
   @success = "#{session[:player_name]} has chosen to stay."
@@ -210,6 +239,10 @@ end
 
 
 get '/game/dealer' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
   @game_total = true
   @game_bet = true
   session[:turn] = "dealer"
@@ -235,6 +268,10 @@ get '/game/dealer' do
 end
 
 post '/game/dealer/hit' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
   @game_total = true
   session[:dealer_cards] << session[:deck].pop
   redirect '/game/dealer'
@@ -242,6 +279,10 @@ post '/game/dealer/hit' do
 end
 
 get '/game/compare' do
+puts session[:player_name]
+puts session[:player_pot]
+puts session[:player_bet]
+puts session[:turn]
   @game_total = true
   @game_bet = true
   @show_hit_or_stay_buttons = false
@@ -267,18 +308,6 @@ end
 get '/game_over' do
   erb :game_over
 end
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

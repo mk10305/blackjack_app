@@ -40,6 +40,10 @@ background-color: black;
 
 }
 
+.dealer_cards {
+  border: 1px solid white; 
+  overflow:hidden;
+}
 
 .alert  {
   text-align: center;
